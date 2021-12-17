@@ -7,7 +7,7 @@ import Website from './Website.js';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Website />
+    <Menu />
   </React.StrictMode>,
   document.getElementById('root')
 );

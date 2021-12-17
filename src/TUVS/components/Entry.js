@@ -6,8 +6,6 @@ function Entry(props) {
 
     return (
         <div>
-            <h2>Data:</h2>
-            <h3>{props.data.title}</h3>
             {Array.from(props.data.strings.entries()).map((item, i) => {
                 return <p key={i} >{item[0]}: {item[1]}</p>;
             })}

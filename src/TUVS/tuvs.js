@@ -5,11 +5,11 @@ import { REACT_APP_TEZOS_RPC_URL, NFT_CONTRACT_ADDRESS } from './globals'
 import { useContract } from './hooks/use-contract';
 import { useWallet } from './hooks/use-wallet';
 import { useState, useEffect } from 'react';
-import Identity from './components/Identity';
+import Entry from './components/Entry';
 
-function TUVS() {
+function TUVS(props) {
 
-    const [owned, setOwned] = useState([]);
+    const [entries, setEntries] = useState([]);
 
     const tezos = new TezosToolkit(REACT_APP_TEZOS_RPC_URL)
   
@@ -30,7 +30,7 @@ function TUVS() {
       connect: connectToContract,
       increaseOperationsCount,
     } = useContract(tezos);
-  
+
     useEffect(() => {
       connectToContract();
     }, [])
@@ -71,47 +71,42 @@ function TUVS() {
         let numTokens = await storage.next_token_id;
         let o = [];
         for(let i = 0; i < numTokens; i++) {
-          if(await storage.ledger.get(`${i}`) === address) {
-            console.log("pushing");
-            // let entry = storage.metadata.get(`${i}`);
-            // storage.metadata.get(`${i}`).map((item, i) => {
-            //   o.push(item);
-            // })
-            // console.log(typeof(entry[0]));
-            // if(entry) {
-            //   console.log("entry found");
-            //   o.push(entry.title)
-            // }
+          const id = await storage.ledger.get(`${i}`);
+          if(id === address) {
             const md = await storage.metadata.get(`${i}`);
-            // md.forEach((entry, i) => {
-            //   console.log(entry.title)
-            // })
-            // const entry = await md.get("First Entry!");
-            // console.log(entry.nats[0]);
-            o.push(md);
+            if(md) {
+              Array.from(md.values()).forEach((entry, i) => {
+                // if(entry[0] === props.title) {
+                  o.push(entry);
+                  props.callback();
+                // }
+              });
+            }
           }
         }
-        setOwned(o);
+        setEntries(o);
       } catch (e) {
         alert(e);
       }
     }
   
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1>Tezos User Verification System</h1>
-          <div>{walletError && <p>Wallet error: {walletError}</p>}</div>
-          <div>{contractError && <p>Contract error: {contractError}</p>}</div>
-          <button onClick={connect}>Connect Wallet</button>
-          {initialized && owned.length == 0 && <button onClick={mint}>Mint</button>}
-          <div>
-            {owned.map((item, i) => {
-              return <Identity key={i} entries={item}/>;
-              <h1>Identity!</h1>
-            })}
+      <div>
+        { props.interface === "Connect" &&
+          <div className="App">
+            <header className="App-header">
+              <div>{walletError && <p>Wallet error: {walletError}</p>}</div>
+              <div>{contractError && <p>Contract error: {contractError}</p>}</div>
+              <button onClick={connect}>Connect Wallet</button>
+              {initialized && entries.length == 0 && <button onClick={mint}>Mint</button>}
+              <div>
+                {entries.map((item, i) => {
+                  return <Entry key={i} data={item}/>;
+                })}
+              </div>
+            </header>
           </div>
-        </header>
+        }
       </div>
     );
   
