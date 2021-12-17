@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import App from './App';
 import './index.css';
 import TUVS from './TUVS/tuvs'
@@ -10,37 +10,80 @@ const welcomeMessage = <p>
   your wallet below.
 </p>
 
-export default class Menu extends React.Component {
-    state = {
-        gameState: "Menu",
-        idRecieved: false
+export function Menu() {
+
+    const [gameState, setGameState] = useState("Menu");
+    const [score, setScore] = useState(2);
+
+    const entryData = {
+        strings: [],
+        nats: [
+            ["High Score", score]
+        ]
     }
 
-    recieveId = () => {
-        this.setState({idRecieved: true});
+    const gameOverFields = {
+        strings: ["User Name"],
+        nats: ["R", "G", "B"]
     }
 
-    runApp = ()=>{
-        this.setState({gameState: "Running"});
+    const {
+        idRecieved,
+        connectToContract,
+        setApplicationTitle,
+        setUserDataFields,
+        TUVS_ConnectionInterface,
+        TUVS_GameOverInterface
+    } = TUVS();
+
+    useEffect(() => {
+        setApplicationTitle("Tez-Snake");
+        setUserDataFields(entryData, gameOverFields);
+    }, [gameState])
+
+    function toMenu() {
+        connectToContract();
+        setGameState("Menu");
     }
 
-    killApp = () => {
-        this.setState({gameState: "Menu"});
+    function playGame() {
+        updateScore(2);
+        setGameState("Running");
     }
 
-    render() {
-        if(this.state.gameState === "Running"){
-            return(<App callback={this.killApp}/>)
-        }
-        else {
-            return (
-            <div>
-                <h1>Tez-Snake</h1>
-                <div>{welcomeMessage}</div>
-                <TUVS title={"Tez-Snake"} callback={this.recieveId} interface={"Connect"}/>
-                {this.state.idRecieved && <button onClick={this.runApp}>Play Game</button>}
-            </div>
-            )
-        }
+    function gameOver() {
+        setGameState("GameOver");
     }
+
+    function updateScore(newScore) {
+        setScore(newScore);
+    }
+
+    return (
+        <div>
+            { gameState === "Menu" &&
+                <div>
+                    <h1>Tez-Snake</h1>
+                    {welcomeMessage}
+                    <TUVS_ConnectionInterface/>
+                    {idRecieved && <button onClick={playGame}>Play Game</button>}
+                </div>
+            }
+            { gameState === "Running" &&
+                <div>
+                    <h1>Score: {score}</h1>
+                    <App gameOverCallback={gameOver} updateScoreCallback={updateScore}/>
+                </div>
+            }
+            { gameState === "GameOver" &&
+                <div>
+                    <TUVS_GameOverInterface/>
+                    <button onClick={playGame}>Play Again</button>
+                    <button onClick={toMenu}>Main Menu</button>
+                </div>
+            }
+        </div>
+    )
 }
+
+export default Menu;

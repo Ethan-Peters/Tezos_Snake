@@ -2,7 +2,6 @@ import './index.css';
 import Snake from './Snake';
 import React from 'react';
 import Food from './Food';
-import TUVS from './TUVS/tuvs'
 
 const getRandomCoordinates = () => {
   let min = 1;
@@ -105,7 +104,7 @@ class App extends React.Component {
   onGameOver=()=>{
     alert(`GAME OVER! Your score was ${this.state.snakeDots.length}`);
     this.setState(initialState);
-    this.props.callback();
+    this.props.gameOverCallback();
   }
 
   enlargeSnake=()=>{
@@ -114,6 +113,7 @@ class App extends React.Component {
     this.setState({
       snakeDots: newSnake
     });
+    this.props.updateScoreCallback(this.state.snakeDots.length);
   }
 
   checkIfColliding=()=>{
