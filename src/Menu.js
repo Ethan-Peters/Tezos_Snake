@@ -1,6 +1,8 @@
 import React from 'react';
 import App from './App';
 import './index.css';
+import TUVS from './TUVS/tuvs'
+
 export default class Menu extends React.Component {
     state = {
         gameIsRunning: false
@@ -14,12 +16,15 @@ export default class Menu extends React.Component {
         }
         else {
             return (
-            <div className = 'button-area'>
-                <div className = 'button-container'>
-                    <button>Link Wallet</button>
-                </div>
-                <div className = 'button-container2' onClick={this.runApp}>
-                    <button>Play Game</button>
+            <div>
+                <TUVS/>
+                <div className = 'button-area'>
+                    <div className = 'button-container'>
+                        <button>Link Wallet</button>
+                    </div>
+                    <div className = 'button-container2' onClick={this.runApp}>
+                        <button>Play Game</button>
+                    </div>
                 </div>
             </div>
             )
