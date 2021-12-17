@@ -1,0 +1,54 @@
+.background {
+  position: absolute;
+  width:100vw;
+  height:100vh;
+  background-color: #4C3F91;
+  border: -10px solid;
+  border-color: #B958A5;
+  left: 0%;
+  top: 0%;
+  z-index: -1;
+}
+.window1 {
+    position: absolute;
+    width: 94vw;
+    height: 85vh;
+    background-color: #B958A5;
+    border: 1vh solid;
+    border-color: #833f91;
+    top: 7.5vh;
+    left: 2.5vw;
+    z-index: 0;
+}
+.tabController {
+    position: absolute;
+    width: 54vw;
+    height: 6vh;
+    top: 2vh;
+    left: 2.5vw;
+    z-index: -1;
+}
+.tabSelect {
+    position: relative;
+    width: 33%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    background-color: #B958A5;
+    border: 5px solid;
+    border-bottom: 0px;
+    border-color: #833f91;
+    font-size: 2vw;
+    font-style: normal;
+}
+.tab {
+    position: absolute;
+    width: 94vw;
+    height: 85vh;
+    background-color: #00000000;
+    border: 1vh solid;
+    border-color: #00000000;
+    top: 7.5vh;
+    left: 2.5vw;
+    z-index: 0;
+}
