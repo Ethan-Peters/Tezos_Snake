@@ -4,8 +4,9 @@ import './App.css';
 import TUVS from './TUVS/tuvs'
 
 const welcomeMessage = <p className="subtitle">
-  Welcome to Tez-Snake! This game uses the Tezos User Verification System (TUVS)
-  to create user profiles and store data securely on the blockchain. If you have
+  Welcome to Tez-Snake! This game uses
+  the <a href="https://master.d173refua7xzyw.amplifyapp.com/">Tezos User Verification System (TUVS)</a> to
+  create user profiles and store data securely on the blockchain. If you have
   already created a TUVS identity, you can continue to Tez-Snake by connecting
   your wallet below.
 </p>
