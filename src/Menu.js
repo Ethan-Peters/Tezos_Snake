@@ -73,8 +73,7 @@ export function Menu() {
         <div class="logo"></div>
         <div class="headerWrapper">
             <a class="navigation" onClick={toMenu}>Home</a>
-            <a class="navigation" onClick={toAbout}>About</a>
-            <a class="navigation" href="https://github.com/Ethan-Peters/Tezos_Snake" target="_empty">Source</a>
+            <a class="navigation" href="https://github.com/Ethan-Peters/Tezos_Snake" target="_empty">Source Code</a>
         </div>
         </div>
     </header>
