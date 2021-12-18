@@ -12,14 +12,14 @@ const welcomeMessage = <p className="subtitle">
 
 const header = 
     <header>
-    <div class="headerContent">
-    <div class="logo">Logo</div>
-    <div class="headerWrapper">
-        <a class="navigation">Home</a>
-        <a class="navigation">About</a>
-        <a class="navigation">Source</a>
-    </div>
-    </div>
+        <div class="headerContent">
+        <div class="logo"></div>
+        <div class="headerWrapper">
+            <a class="navigation">Home</a>
+            <a class="navigation">About</a>
+            <a class="navigation">Source</a>
+        </div>
+        </div>
     </header>
 
 export function Menu() {
@@ -82,8 +82,8 @@ export function Menu() {
                             <h1 class="title"><span class="heavy">Tez-Snake</span></h1>
                             {welcomeMessage}
                         </div>
-                        <TUVS_ConnectionInterface/>
                         {idRecieved && <div class="buttonContainer"><button onClick={playGame}>Play Game</button></div>}
+                        <TUVS_ConnectionInterface/>
                     </div>
                 }
                 { gameState === "Running" &&

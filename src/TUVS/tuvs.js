@@ -8,13 +8,13 @@ import { useState, useEffect } from 'react';
 import Entry from './components/Entry';
 
 const noIdMessage = 
-  <p>
+  <p class="subtitle centered">
     It looks like you don't have an ID yet!
     You can create one at the TUVS website.
   </p>
 
 const noEntryMessage = 
-  <p>
+  <p class="subtitle centered">
     Your ID doesn't have any entry for this game yet!
     Start playing to create an entry.
   </p>
@@ -169,9 +169,13 @@ function TUVS() {
             <div>{walletError && <p>Wallet error: {walletError}</p>}</div>
             <div>{contractError && <p>Contract error: {contractError}</p>}</div>
             <div class="buttonContainer"><button onClick={connect}>Connect Wallet</button></div>
-            {loadingEntries && <p>Loading...</p>}
-            {initialized && !loadingEntries && !idRecieved && noIdMessage}
-            {initialized && !loadingEntries && entries.length == 0 && noEntryMessage}
+            {loadingEntries && <div class="dataContainer"><h1>Loading...</h1></div>}
+            {initialized && !loadingEntries && !idRecieved &&
+              <div class="buttonContainer">{noIdMessage}</div>
+            }
+            {initialized && !loadingEntries && entries.length == 0 &&
+              <div class="buttonContainer">{noEntryMessage}</div>
+            }
             <div>
               {entries.map((item, i) => {
                 return <Entry key={i} data={item}/>;
