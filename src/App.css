@@ -170,6 +170,7 @@ button {
   font-size: 20px !important;
   font-weight: 400;
   cursor: pointer;
+  margin: 0px 1rem;
 }
 
 button:hover {
@@ -228,6 +229,29 @@ button:hover {
 
 p a {
   color: rgb(255, 0, 122);
+}
+
+label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem;
+}
+
+label * {
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 1rem;
+}
+
+label input {
+  backdrop-filter: blur(4px);
+}
+
+label p {
+  color: white !important;
+  text-align: right;
+
 }
 
 /* .App {

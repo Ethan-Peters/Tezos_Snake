@@ -10,18 +10,6 @@ const welcomeMessage = <p className="subtitle">
   your wallet below.
 </p>
 
-const header = 
-    <header>
-        <div class="headerContent">
-        <div class="logo"></div>
-        <div class="headerWrapper">
-            <a class="navigation">Home</a>
-            <a class="navigation">About</a>
-            <a class="navigation">Source</a>
-        </div>
-        </div>
-    </header>
-
 export function Menu() {
 
     const [gameState, setGameState] = useState("Menu");
@@ -58,6 +46,10 @@ export function Menu() {
         setGameState("Menu");
     }
 
+    function toAbout() {
+        setGameState("About");
+    }
+
     function playGame() {
         updateScore(2);
         setGameState("Running");
@@ -71,11 +63,26 @@ export function Menu() {
         setScore(newScore);
     }
 
+    const header = 
+    <header>
+        <div class="headerContent">
+        <div class="logo"></div>
+        <div class="headerWrapper">
+            <a class="navigation" onClick={toMenu}>Home</a>
+            <a class="navigation" onClick={toAbout}>About</a>
+            <a class="navigation" href="https://github.com/Ethan-Peters/Tezos_Snake" target="_empty">Source</a>
+        </div>
+        </div>
+    </header>
+
     return (
         <div>
             { header }
             <div class="body">
                 <div class="card"><div class="overlay"></div></div>
+                { gameState === "About" &&
+                    <h1>:)</h1>
+                }
                 { gameState === "Menu" &&
                     <div class="wrapper">
                         <div class="column">
@@ -95,8 +102,10 @@ export function Menu() {
                 { gameState === "GameOver" &&
                     <div>
                         <TUVS_GameOverInterface/>
-                        <button onClick={playGame}>Play Again</button>
-                        <button onClick={toMenu}>Main Menu</button>
+                        <div class="buttonContainer">
+                            <button onClick={playGame}>Play Again</button>
+                            <button onClick={toMenu}>Main Menu</button>
+                        </div>
                     </div>
                 }
             </div>

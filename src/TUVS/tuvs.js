@@ -208,7 +208,7 @@ function TUVS() {
         return (
           <div>
             <label>
-              {props.field}
+              <p>{props.field}</p>
               <input type={props.type} value={val} onChange={handleChange}></input>
             </label>
           </div>
@@ -217,17 +217,19 @@ function TUVS() {
 
       return (
         <div className="App-header">
-          <h1>Game Over :(</h1>
+          <div class="buttonContainer"><h1 class="phrase">Game Over :(</h1></div>
           { !submitted &&
-            <form onSubmit={handleSubmit}>
-              {gameOverFields.strings.map((string, i) => {
-                return <Field type="text" field={string} key={i}/>;
-              })}
-              {gameOverFields.nats.map((nat, i) => {
-                return <Field type="number" field={nat} key={i}/>;
-              })}
-              <input type="submit" value="Create Entry" />
-            </form>
+            <dev class="entryContainer">
+              <form onSubmit={handleSubmit}>
+                {gameOverFields.strings.map((string, i) => {
+                  return <Field type="text" field={string} key={i}/>;
+                })}
+                {gameOverFields.nats.map((nat, i) => {
+                  return <Field type="number" field={nat} key={i}/>;
+                })}
+                <div class="buttonContainer"><button onClick={handleSubmit}>Save to Identity</button></div>
+              </form>
+            </dev>
           }
         </div>
       )
