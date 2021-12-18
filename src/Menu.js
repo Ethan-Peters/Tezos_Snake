@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import App from './App';
-import './index.css';
+import './App.css';
 import TUVS from './TUVS/tuvs'
 
-const welcomeMessage = <p>
+const welcomeMessage = <p className="subtitle">
   Welcome to Tez-Snake! This game uses the Tezos User Verification System (TUVS)
   to create user profiles and store data securely on the blockchain. If you have
   already created a TUVS identity, you can continue to Tez-Snake by connecting
   your wallet below.
 </p>
+
+const header = 
+    <header>
+    <div class="headerContent">
+    <div class="logo">Logo</div>
+    <div class="headerWrapper">
+        <a class="navigation">Home</a>
+        <a class="navigation">About</a>
+        <a class="navigation">Source</a>
+    </div>
+    </div>
+    </header>
 
 export function Menu() {
 
@@ -61,27 +73,35 @@ export function Menu() {
 
     return (
         <div>
-            { gameState === "Menu" &&
-                <div>
-                    <h1>Tez-Snake</h1>
-                    {welcomeMessage}
-                    <TUVS_ConnectionInterface/>
-                    {idRecieved && <button onClick={playGame}>Play Game</button>}
+            { header }
+            <div class="body">
+                <div class="card"><div class="overlay"></div></div>
+                <div class="wrapper">
+                    { gameState === "Menu" &&
+                        <div>
+                            <div class="column">
+                                <h1 class="title"><span class="heavy">Tez-Snake</span></h1>
+                            </div>
+                            {welcomeMessage}
+                            <TUVS_ConnectionInterface/>
+                            {idRecieved && <button onClick={playGame}>Play Game</button>}
+                        </div>
+                    }
+                    { gameState === "Running" &&
+                        <div>
+                            <h1>Score: {score}</h1>
+                            <App gameOverCallback={gameOver} updateScoreCallback={updateScore}/>
+                        </div>
+                    }
+                    { gameState === "GameOver" &&
+                        <div>
+                            <TUVS_GameOverInterface/>
+                            <button onClick={playGame}>Play Again</button>
+                            <button onClick={toMenu}>Main Menu</button>
+                        </div>
+                    }
                 </div>
-            }
-            { gameState === "Running" &&
-                <div>
-                    <h1>Score: {score}</h1>
-                    <App gameOverCallback={gameOver} updateScoreCallback={updateScore}/>
-                </div>
-            }
-            { gameState === "GameOver" &&
-                <div>
-                    <TUVS_GameOverInterface/>
-                    <button onClick={playGame}>Play Again</button>
-                    <button onClick={toMenu}>Main Menu</button>
-                </div>
-            }
+            </div>
         </div>
     )
 }

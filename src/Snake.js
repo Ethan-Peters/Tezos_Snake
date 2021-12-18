@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+import './App.css';
 
 const r = 0;
 const g = 100;

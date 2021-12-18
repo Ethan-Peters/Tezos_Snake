@@ -1,6 +1,6 @@
 import React from 'react';
 import { MichelsonMap, TezosToolkit } from '@taquito/taquito';
-import './App.css';
+import '../App.css';
 import { REACT_APP_TEZOS_RPC_URL, NFT_CONTRACT_ADDRESS } from './globals'
 import { useContract } from './hooks/use-contract';
 import { useWallet } from './hooks/use-wallet';
