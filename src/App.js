@@ -102,7 +102,7 @@ class App extends React.Component {
   }
 
   onGameOver=()=>{
-    alert(`GAME OVER! Your score was ${this.state.snakeDots.length}`);
+    // alert(`GAME OVER! Your score was ${this.state.snakeDots.length}`);
     this.setState(initialState);
     this.props.gameOverCallback();
   }
@@ -144,7 +144,7 @@ class App extends React.Component {
   render() {
     return (
         <div className = "game-area">
-          <Snake snakeDots={this.state.snakeDots}/>
+          <Snake snakeDots={this.state.snakeDots} snakeColor={this.props.snakeColor}/>
           <Food dot={this.state.food}/>
         </div>
       );

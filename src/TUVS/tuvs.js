@@ -19,6 +19,11 @@ const noEntryMessage =
     Start playing to create an entry.
   </p>
 
+const gameOverMessage =
+  <p class="subtitle centered">
+
+  </p>
+
 function TUVS() {
 
     const [entries, setEntries] = useState([]);
@@ -31,6 +36,7 @@ function TUVS() {
     const [gameOverFields, setGameOverFields] = useState({});
     const [strings, setStrings] = useState(new MichelsonMap());
     const [nats, setNats] = useState(new MichelsonMap());
+    const [awaiting, setAwaiting] = useState(false);
 
     const tezos = new TezosToolkit(REACT_APP_TEZOS_RPC_URL)
   
@@ -66,12 +72,12 @@ function TUVS() {
         .at(NFT_CONTRACT_ADDRESS)
         .then((contract) => contract.methods.mint_id([address]).send())
         .then((op) => {
-          alert("Awaiting confirmation");
+          setAwaiting(true);
           return op.confirmation();
         })
         .then((result) => {
           if(result.completed) {
-            alert("Complete!");
+            setAwaiting(false);
           }
           else {
             alert("Error :(");
@@ -112,12 +118,12 @@ function TUVS() {
         .at(NFT_CONTRACT_ADDRESS)
         .then((contract) => contract.methods.create_entry(create_entry_params).send())
         .then((op) => {
-          alert("Awaiting confirmation");
+          setAwaiting(true);
           return op.confirmation();
         })
         .then((result) => {
           if(result.completed) {
-            alert("Complete!");
+            setAwaiting(false);
           }
           else {
             alert("Error :(");
@@ -147,7 +153,6 @@ function TUVS() {
             const md = await storage.metadata.get(`${i}`);
             if(md) {
               Array.from(md.values()).forEach((entry, i) => {
-                console.log(entry.title);
                 if(entry.title === title) {
                   o.push(entry);
                 }
@@ -163,12 +168,43 @@ function TUVS() {
       }
     }
   
+    function getValueByKey(key, defaultVal) {
+      var val = defaultVal;
+
+      // if(entries) {
+      //   console.log(typeof(entries[0]))
+      //   if(entries[0]) {
+      //     entries[0].strings.forEach((item, i) => {
+      //       console.log("item: " + JSON.stringify(item));
+      //     })
+      //   }
+      // }
+
+      if(entries) {
+        if(entries[0]) {
+          Array.from(entries[0].strings.entries()).forEach((item, i) => {
+            if(item[0] === key) {
+              val = item[1];
+            }
+          })
+          Array.from(entries[0].nats.entries()).forEach((item, i) => {
+            if(item[0] === key) {
+              val = item[1];
+            }
+          })
+        }
+      }
+
+      return val;
+    }
+
     function TUVS_ConnectionInterface () { 
       return (
         <div>
-            <div>{walletError && <p>Wallet error: {walletError}</p>}</div>
-            <div>{contractError && <p>Contract error: {contractError}</p>}</div>
+            {/* <div>{walletError && <p>Wallet error: {walletError}</p>}</div> */}
+            {/* <div>{contractError && <p>Contract error: {contractError}</p>}</div> */}
             <div class="buttonContainer"><button onClick={connect}>Connect Wallet</button></div>
+            {awaiting && <div class="buttonContainer"><div class="phrase">Awaiting previous transaction...</div></div>}
             {loadingEntries && <div class="dataContainer"><h1>Loading...</h1></div>}
             {initialized && !loadingEntries && !idRecieved &&
               <div class="buttonContainer">{noIdMessage}</div>
@@ -251,6 +287,7 @@ function TUVS() {
 
     return {
       idRecieved,
+      getValueByKey,
       connectToContract,
       setApplicationTitle,
       setUserDataFields,

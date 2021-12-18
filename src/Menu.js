@@ -15,21 +15,23 @@ export function Menu() {
 
     const [gameState, setGameState] = useState("Menu");
     const [score, setScore] = useState(2);
+    const [highScore, setHighScore] = useState(0);
 
     const entryData = {
         strings: [],
         nats: [
-            ["High Score", score]
+            ["High Score", Math.max(highScore, score)]
         ]
     }
 
     const gameOverFields = {
-        strings: ["User Name"],
-        nats: ["R", "G", "B"]
+        strings: ["User Name", "Snake Color"],
+        nats: []
     }
 
     const {
         idRecieved,
+        getValueByKey,
         connectToContract,
         setApplicationTitle,
         setUserDataFields,
@@ -40,6 +42,7 @@ export function Menu() {
     useEffect(() => {
         setApplicationTitle("Tez-Snake");
         setUserDataFields(entryData, gameOverFields);
+        setHighScore(getValueByKey("High Score", 0));
     }, [gameState])
 
     function toMenu() {
@@ -97,7 +100,7 @@ export function Menu() {
                 { gameState === "Running" &&
                     <div>
                         <h1>Score: {score}</h1>
-                        <App gameOverCallback={gameOver} updateScoreCallback={updateScore}/>
+                        <App gameOverCallback={gameOver} updateScoreCallback={updateScore} snakeColor={getValueByKey("Snake Color", "#FFFFFF")}/>
                     </div>
                 }
                 { gameState === "GameOver" &&
