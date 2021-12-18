@@ -178,7 +178,7 @@ function TUVS() {
           })
           Array.from(entries[0].nats.entries()).forEach((item, i) => {
             if(item[0] === key) {
-              val = item[1];
+              val = item[1].toNumber();
             }
           })
         }
