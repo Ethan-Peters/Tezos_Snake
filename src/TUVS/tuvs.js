@@ -221,7 +221,7 @@ function TUVS() {
       )
     }
 
-    function TUVS_GameOverInterface () {
+    function TUVS_GameOverInterface (props) {
 
       const [submitted, setSubmitted] = useState(false);
 
@@ -253,9 +253,21 @@ function TUVS() {
 
       return (
         <div className="App-header">
-          <div class="buttonContainer"><h1 class="phrase">Game Over :(</h1></div>
+          {props.score > props.highScore &&
+            <div>
+              <div class="buttonContainer"><h1 class="phrase">New High Score!</h1></div>
+              <div class="buttonContainer"><p class="subtitle centered">
+                Make sure you save this score to your digital identity!
+              </p></div>
+            </div>
+          }
+          {props.score < props.highScore &&
+            <div class="buttonContainer"><h1 class="phrase">Game Over :(</h1></div>
+          }
           { !submitted &&
-            <dev class="entryContainer">
+            <div class="entryContainer">
+              <p class="subtitle centered white heavy big">Score: {props.score}</p>
+              <p class="subtitle centered white heavy big">High Score: {props.highScore}</p>
               <form onSubmit={handleSubmit}>
                 {gameOverFields.strings.map((string, i) => {
                   return <Field type="text" field={string} key={i}/>;
@@ -265,7 +277,7 @@ function TUVS() {
                 })}
                 <div class="buttonContainer"><button onClick={handleSubmit}>Save to Identity</button></div>
               </form>
-            </dev>
+            </div>
           }
         </div>
       )

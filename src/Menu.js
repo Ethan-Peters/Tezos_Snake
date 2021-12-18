@@ -105,7 +105,7 @@ export function Menu() {
                 }
                 { gameState === "GameOver" &&
                     <div>
-                        <TUVS_GameOverInterface/>
+                        <TUVS_GameOverInterface score={score} highScore={highScore.toNumber()}/>
                         <div class="buttonContainer">
                             <button onClick={playGame}>Play Again</button>
                             <button onClick={toMenu}>Main Menu</button>
