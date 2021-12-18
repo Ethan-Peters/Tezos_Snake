@@ -190,6 +190,9 @@ function TUVS() {
     function TUVS_ConnectionInterface () { 
       return (
         <div>
+            <div class="buttonContainer"><p class="subtitle centered lessNarrow">This application runs on the
+            Hangzhounet test network. A compatible account can be activated <a href="https://teztnets.xyz/hangzhounet-faucet" target="_blank">here</a>.</p></div>
+            <div class="buttonContainer"></div>
             <div class="buttonContainer"><button onClick={connect}>Connect Wallet</button></div>
             {awaiting && <div class="buttonContainer"><div class="phrase">Awaiting previous transaction...</div></div>}
             {loadingEntries && <div class="dataContainer"><h1>Loading...</h1></div>}

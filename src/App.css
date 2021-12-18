@@ -266,6 +266,10 @@ label p {
   max-width: 425px;
 }
 
+.lessNarrow {
+  max-width: 600px;
+}
+
 /* .App {
   text-align: center;
 }
