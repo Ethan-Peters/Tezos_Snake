@@ -11,7 +11,6 @@ export default(props)=>{
                 const style = {
                     left: `${dot[0]}%`,
                     top: `${dot[1]}%`,
-                    // backgroundColor: `rgb(${r}, ${b}, ${g})`,
                     backgroundColor: `${props.snakeColor}`,
                     border: `1px solid rgb(${r-20}, ${b-20}, ${g-20})`
                 }

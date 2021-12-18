@@ -97,7 +97,6 @@ function TUVS() {
       setNats(n);
       const s = strings;
       entryData.strings.forEach((pair, i) => {
-        alert("mistake");
         s.set(pair[0], pair[1]);
       });
       setStrings(s);
@@ -141,7 +140,6 @@ function TUVS() {
       }
       try {
         setLoadingEntries(true);
-        console.log("parsing storage");
         let numTokens = await storage.next_token_id;
         let o = [];
         for(let i = 0; i < numTokens; i++) {
@@ -171,15 +169,6 @@ function TUVS() {
     function getValueByKey(key, defaultVal) {
       var val = defaultVal;
 
-      // if(entries) {
-      //   console.log(typeof(entries[0]))
-      //   if(entries[0]) {
-      //     entries[0].strings.forEach((item, i) => {
-      //       console.log("item: " + JSON.stringify(item));
-      //     })
-      //   }
-      // }
-
       if(entries) {
         if(entries[0]) {
           Array.from(entries[0].strings.entries()).forEach((item, i) => {
@@ -201,8 +190,6 @@ function TUVS() {
     function TUVS_ConnectionInterface () { 
       return (
         <div>
-            {/* <div>{walletError && <p>Wallet error: {walletError}</p>}</div> */}
-            {/* <div>{contractError && <p>Contract error: {contractError}</p>}</div> */}
             <div class="buttonContainer"><button onClick={connect}>Connect Wallet</button></div>
             {awaiting && <div class="buttonContainer"><div class="phrase">Awaiting previous transaction...</div></div>}
             {loadingEntries && <div class="dataContainer"><h1>Loading...</h1></div>}

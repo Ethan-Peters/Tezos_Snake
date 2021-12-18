@@ -23,7 +23,6 @@ export function useContract(tezos) {
     }
 
     async function connect() {
-        console.log("connecting to contract");
         setLoading(true);
         try {
             const contractInstance = await tezos.wallet.at(NFT_CONTRACT_ADDRESS);
