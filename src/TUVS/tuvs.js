@@ -255,6 +255,9 @@ function TUVS() {
             <div class="entryContainer">
               <p class="subtitle centered white heavy big">Score: {props.score}</p>
               <p class="subtitle centered white heavy big">High Score: {props.highScore}</p>
+              <p class="subtitle centered narrow">
+                Snake color is a hex number, and should be in the form #xxxxxx where x is a hex digit between 0 and F.
+              </p>
               <form onSubmit={handleSubmit}>
                 {gameOverFields.strings.map((string, i) => {
                   return <Field type="text" field={string} key={i}/>;
