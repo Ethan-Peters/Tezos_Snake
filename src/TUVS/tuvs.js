@@ -165,11 +165,10 @@ function TUVS() {
   
     function TUVS_ConnectionInterface () { 
       return (
-        <div className="App">
-          <header className="App-header">
+        <div>
             <div>{walletError && <p>Wallet error: {walletError}</p>}</div>
             <div>{contractError && <p>Contract error: {contractError}</p>}</div>
-            <button onClick={connect}>Connect Wallet</button>
+            <div class="buttonContainer"><button onClick={connect}>Connect Wallet</button></div>
             {loadingEntries && <p>Loading...</p>}
             {initialized && !loadingEntries && !idRecieved && noIdMessage}
             {initialized && !loadingEntries && entries.length == 0 && noEntryMessage}
@@ -178,7 +177,6 @@ function TUVS() {
                 return <Entry key={i} data={item}/>;
               })}
             </div>
-          </header>
         </div>
       )
     }

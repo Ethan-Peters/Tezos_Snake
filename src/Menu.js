@@ -76,31 +76,29 @@ export function Menu() {
             { header }
             <div class="body">
                 <div class="card"><div class="overlay"></div></div>
-                <div class="wrapper">
-                    { gameState === "Menu" &&
-                        <div>
-                            <div class="column">
-                                <h1 class="title"><span class="heavy">Tez-Snake</span></h1>
-                            </div>
+                { gameState === "Menu" &&
+                    <div class="wrapper">
+                        <div class="column">
+                            <h1 class="title"><span class="heavy">Tez-Snake</span></h1>
                             {welcomeMessage}
-                            <TUVS_ConnectionInterface/>
-                            {idRecieved && <button onClick={playGame}>Play Game</button>}
                         </div>
-                    }
-                    { gameState === "Running" &&
-                        <div>
-                            <h1>Score: {score}</h1>
-                            <App gameOverCallback={gameOver} updateScoreCallback={updateScore}/>
-                        </div>
-                    }
-                    { gameState === "GameOver" &&
-                        <div>
-                            <TUVS_GameOverInterface/>
-                            <button onClick={playGame}>Play Again</button>
-                            <button onClick={toMenu}>Main Menu</button>
-                        </div>
-                    }
-                </div>
+                        <TUVS_ConnectionInterface/>
+                        {idRecieved && <div class="buttonContainer"><button onClick={playGame}>Play Game</button></div>}
+                    </div>
+                }
+                { gameState === "Running" &&
+                    <div>
+                        <h1>Score: {score}</h1>
+                        <App gameOverCallback={gameOver} updateScoreCallback={updateScore}/>
+                    </div>
+                }
+                { gameState === "GameOver" &&
+                    <div>
+                        <TUVS_GameOverInterface/>
+                        <button onClick={playGame}>Play Again</button>
+                        <button onClick={toMenu}>Main Menu</button>
+                    </div>
+                }
             </div>
         </div>
     )

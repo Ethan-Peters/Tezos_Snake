@@ -189,6 +189,7 @@ button:hover {
   font-weight: 400;
   margin-bottom: 1rem;
   line-height: 125%;
+  text-align: center;
 }
 
 .entriesContainer {
